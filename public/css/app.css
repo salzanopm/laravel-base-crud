@@ -12173,3 +12173,32 @@ fieldset:disabled .btn {
   }
 }
 
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+main.class {
+  margin: auto;
+  width: 80%;
+}
+
+div.card {
+  margin: auto;
+  width: 60%;
+  padding: 20px;
+}
+
+img.card-img-top {
+  padding: 16px;
+}
+
+a {
+  color: darkgray;
+}
+
+a:hover {
+  color: red;
+}
+

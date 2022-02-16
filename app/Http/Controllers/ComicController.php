@@ -16,7 +16,7 @@ class ComicController extends Controller
     {
         $comics = Comic::all();
         $data = [
-            'pastas' => $comics
+            'comics' => $comics
         ];
         
         return view('comics.index', $data);
