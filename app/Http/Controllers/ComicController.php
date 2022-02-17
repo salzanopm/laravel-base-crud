@@ -41,6 +41,7 @@ class ComicController extends Controller
     public function store(Request $request)
     {
         $form_data = $request->all();
+        $request->validate($this->getValidationRules());
         
         // Salviamo il nuovo tipo di pasta nel database
         $new_comic = new Comic();
@@ -81,7 +82,8 @@ class ComicController extends Controller
      */
     public function edit($id)
     {
-        //
+        $comic = Comic::findOrFail($id);
+        return view('comics.edit', compact('comic'));
     }
 
     /**
@@ -93,7 +95,14 @@ class ComicController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $form_data = $request->all();
+
+        $request->validate($this->getValidationRules());
+        
+        $comic_to_update = Comic::findOrFail($id);
+        $comic_to_update->update($form_data);
+
+        return redirect()->route('comics.show', ['comic' => $comic_to_update->id]);
     }
 
     /**
@@ -104,6 +113,20 @@ class ComicController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $comic_to_delete = Comic::findOrFail($id);
+        $comic_to_delete->delete();
+
+        return redirect()->route('comics.index');
+    }
+
+    // all validation here
+    protected function getValidationRules() {
+        return [
+            'title' => 'required|max:50',
+            'description' => 'min:10|max:60000|nullable',
+            'thumb' => 'required|max:300',
+            'series' => 'required|max:80',
+            'type' => 'required|max:20'
+        ];
     }
 }

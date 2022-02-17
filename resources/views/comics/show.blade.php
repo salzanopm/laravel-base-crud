@@ -10,6 +10,14 @@
           <div>Serie: {{ $comic->series }}</div>
           <div>tipo: {{ $comic->type }}</div>
           <p class="card-text">{{ $comic->description }}</p>
+          <div><a class="btn btn-primary" href="{{ route('comics.edit', ['comic' => $comic->id]) }}">Modifica</a></div>
+          <div>
+            <form action="{{ route('comics.destroy', ['comic' => $comic->id]) }}" method="post">
+              @csrf
+              @method('DELETE')
+              <button class="btn btn-danger" onclick="return confirm('Sei sicuro di voler cancellare?')">Cancella</button>
+            </form>
+          </div>
         </div>
     </div>
 @endsection

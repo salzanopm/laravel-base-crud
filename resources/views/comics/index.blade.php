@@ -7,7 +7,6 @@
             <h2>
                 <a href="{{ route('comics.show', ['comic' => $comic->id]) }}">{{ $comic->title }}</a>
             </h2>
-            
         </div>
     @endforeach
 @endsection
